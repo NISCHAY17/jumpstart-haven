@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cp0akleaqbfrx" path="res://ASSET/JUMP.png" id="3_we6fm"]
 [ext_resource type="Script" uid="uid://basme5jos2tfd" path="res://GAME/obstacle_spawner.gd" id="6_m10jx"]
 [ext_resource type="PackedScene" uid="uid://counonw0236ex" path="res://GAME/obstacle.tscn" id="7_ihiju"]
+[ext_resource type="Texture2D" uid="uid://8uqg6lgvh48j" path="res://ASSET/died.png" id="8_go8tf"]
 [ext_resource type="FontFile" uid="uid://cu56d54cfbhj0" path="res://GAME/DarumadropOne-Regular.ttf" id="8_msohs"]
 [ext_resource type="Texture2D" uid="uid://bl7uunwgelpje" path="res://ASSET/newbg.png" id="8_tbxec"]
 
@@ -121,6 +122,24 @@ size_flags_horizontal = 0
 text = "0.0 s"
 label_settings = SubResource("LabelSettings_tbxec")
 
+[node name="GameOverOverlay" type="TextureButton" parent="UI" unique_id=1423692941]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -186.0
+offset_top = -524.0
+offset_right = 1262.0
+offset_bottom = 562.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.27999985, 0.27999985)
+size_flags_horizontal = 4
+texture_normal = ExtResource("8_go8tf")
+texture_pressed = ExtResource("8_go8tf")
+texture_hover = ExtResource("8_go8tf")
+
 [node name="Newbg" type="Sprite2D" parent="." unique_id=1190808392]
 z_index = -1
 position = Vector2(434, 324)
@@ -132,3 +151,4 @@ position = Vector2(434, 323)
 texture = ExtResource("8_tbxec")
 
 [connection signal="timeout" from="ObstacleSpawner/Timer" to="ObstacleSpawner" method="_on_timer_timeout"]
+[connection signal="pressed" from="UI/GameOverOverlay" to="." method="_on_game_over_overlay_pressed"]

@@ -7,6 +7,7 @@ extends Node2D
 
 @onready var time_label: Label = $UI/TimeLabel
 @onready var spawn_timer: Timer = $ObstacleSpawner/Timer
+@onready var game_over_overlay: TextureButton = $UI/GameOverOverlay
 
 var time_spent: float = 0.0
 var game_running: bool = true
@@ -15,13 +16,13 @@ var bg_width: float
 
 
 func _ready():
+	# Hide game-over screen at start
+	game_over_overlay.visible = false
 
-	bg_width = bg1.texture.get_width() * bg1.scale.x
+	# Background setup
+	bg_width = bg1.texture.get_width() * abs(bg1.scale.x)
 
-	# Put second background EXACTLY after first
 	bg2.global_position.x = bg1.global_position.x + bg_width
-
-	# Force same vertical position
 	bg2.global_position.y = bg1.global_position.y
 
 
@@ -29,23 +30,17 @@ func _process(delta):
 	if not game_running:
 		return
 
-
-	# TIMER
-
+	# SURVIVAL TIMER
 	time_spent += delta
 	time_label.text = "%.1f s" % time_spent
 
-	
+	# BACKGROUND MOVEMENT
 	var move_amount = background_speed * delta
 
 	bg1.global_position.x -= move_amount
 	bg2.global_position.x -= move_amount
 
-	
-
-
-	# its right edge = position + half width
-
+	# BACKGROUND LOOP
 	if bg1.global_position.x + bg_width / 2.0 < 0:
 		bg1.global_position.x = bg2.global_position.x + bg_width
 
@@ -59,9 +54,18 @@ func game_over():
 
 	game_running = false
 
+	# Stop new obstacles
 	spawn_timer.stop()
 
+	# Daven death animation
 	$Daven.die()
+
+	# SHOW GAME OVER IMAGE
+	game_over_overlay.visible = true
 
 	print("GAME OVER")
 	print("Survived: %.1f seconds" % time_spent)
+
+
+func _on_game_over_overlay_pressed():
+	get_tree().reload_current_scene()
