@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://counonw0236ex"]
+
+[ext_resource type="Script" uid="uid://cympvbv4hvcmk" path="res://GAME/obstacle.gd" id="1_sc6l7"]
+[ext_resource type="Texture2D" uid="uid://dekdwvx53sxcl" path="res://ASSET/ground objects.png" id="2_wl3ou"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u18t4"]
+size = Vector2(414.5, 228)
+
+[node name="Obstacle" type="Area2D" unique_id=2123092465]
+script = ExtResource("1_sc6l7")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=274834661]
+position = Vector2(-115, -186)
+scale = Vector2(0.32, 0.32)
+texture = ExtResource("2_wl3ou")
+centered = false
+hframes = 3
+frame = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2078972404]
+position = Vector2(4.25, -34)
+scale = Vector2(0.32, 0.32)
+shape = SubResource("RectangleShape2D_u18t4")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -1,14 +1,33 @@
 extends Node2D
 
-@export var speed := 200.0
-@export var background_width := 1152.0
+@export var speed: float = 200.0
+@export var background_width: float = 1152.0
+
+@onready var bg1: Sprite2D = $Bg1
+@onready var bg2: Sprite2D = $Bg2
+@onready var time_label: Label = $UI/TimeLabel
+
+var time_spent: float = 0.0
+var game_running: bool = true
+
 
 func _process(delta):
-	$Bg1.position.x -= speed * delta
-	$Bg2.position.x -= speed * delta
+	# MOVE BACKGROUND
+	bg1.position.x -= speed * delta
+	bg2.position.x -= speed * delta
 
-	if $Bg1.position.x <= -background_width:
-		$Bg1.position.x = $Bg2.position.x + background_width
+	# LOOP BACKGROUND
+	if bg1.position.x <= -background_width:
+		bg1.position.x = bg2.position.x + background_width
 
-	if $Bg2.position.x <= -background_width:
-		$Bg2.position.x = $Bg1.position.x + background_width
+	if bg2.position.x <= -background_width:
+		bg2.position.x = bg1.position.x + background_width
+
+	# COUNT SURVIVAL TIME
+	if game_running:
+		time_spent += delta
+		update_time()
+
+
+func update_time():
+	time_label.text = "%.1f s" % time_spent

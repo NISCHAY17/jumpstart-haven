@@ -60,14 +60,13 @@ size = Vector2(3000, 40)
 [sub_resource type="LabelSettings" id="LabelSettings_tbxec"]
 font = ExtResource("8_msohs")
 font_size = 36
-font_color = Color(0.47058824, 0.23921569, 0.16862746, 1)
 
 [node name="MAIN" type="Node2D" unique_id=1877317916]
 script = ExtResource("1_we6fm")
 speed = 0.0
 
 [node name="Daven" type="CharacterBody2D" parent="." unique_id=1231262178]
-position = Vector2(153.85107, 478.2837)
+position = Vector2(-194, 50)
 script = ExtResource("1_vcodn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Daven" unique_id=304555654]
@@ -87,29 +86,29 @@ position = Vector2(255, -50)
 texture = ExtResource("2_vql1m")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=672527657]
-position = Vector2(434.85107, 574.2837)
+position = Vector2(87, 146)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=909607206]
 position = Vector2(-27, -59)
 shape = SubResource("RectangleShape2D_x6teq")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=817535610]
-position = Vector2(565.8511, 320.2837)
+position = Vector2(218, -108)
 
 [node name="Bg1" type="Sprite2D" parent="." unique_id=237775180]
 z_index = -1
-position = Vector2(956.8511, 319.2837)
+position = Vector2(609, -109)
 scale = Vector2(0.887524, 0.887524)
 texture = ExtResource("4_vql1m")
 
 [node name="Bg2" type="Sprite2D" parent="." unique_id=1349629451]
 z_index = -1
-position = Vector2(-970.1489, 319.2837)
+position = Vector2(-1318, -109)
 scale = Vector2(0.887524, 0.887524)
 texture = ExtResource("4_vql1m")
 
 [node name="ObstacleSpawner" type="Node2D" parent="." unique_id=175472147]
-position = Vector2(1185.8511, 473.2837)
+position = Vector2(838, 45)
 script = ExtResource("6_m10jx")
 obstacle_scene = ExtResource("7_ihiju")
 
@@ -117,20 +116,14 @@ obstacle_scene = ExtResource("7_ihiju")
 wait_time = 2.0
 autostart = true
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=781902531]
-layer = 2
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=781902531]
 
-[node name="TimeLabel" type="Label" parent="UI" unique_id=2089151799]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -116.0
-offset_top = 6.0
-offset_right = -36.0
-offset_bottom = 59.0
-grow_horizontal = 0
-size_flags_horizontal = 0
-text = "0.0 s"
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=2089151799]
+offset_left = 184.0
+offset_top = -419.0
+offset_right = 783.0
+offset_bottom = -366.0
+text = "score_label.text = \"%04d\" % int(score)"
 label_settings = SubResource("LabelSettings_tbxec")
 
 [connection signal="timeout" from="ObstacleSpawner/Timer" to="ObstacleSpawner" method="_on_timer_timeout"]
