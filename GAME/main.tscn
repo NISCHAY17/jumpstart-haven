@@ -4,10 +4,10 @@
 [ext_resource type="Script" uid="uid://qrg8yci1syky" path="res://GAME/main.gd" id="1_we6fm"]
 [ext_resource type="Texture2D" uid="uid://b4xlnw4gccca0" path="res://ASSET/SPRITE SHEET.png" id="2_vql1m"]
 [ext_resource type="Texture2D" uid="uid://cp0akleaqbfrx" path="res://ASSET/JUMP.png" id="3_we6fm"]
-[ext_resource type="Texture2D" uid="uid://cerwca0nqe7l4" path="res://ASSET/bg 1v.png" id="4_vql1m"]
 [ext_resource type="Script" uid="uid://basme5jos2tfd" path="res://GAME/obstacle_spawner.gd" id="6_m10jx"]
 [ext_resource type="PackedScene" uid="uid://counonw0236ex" path="res://GAME/obstacle.tscn" id="7_ihiju"]
 [ext_resource type="FontFile" uid="uid://cu56d54cfbhj0" path="res://GAME/DarumadropOne-Regular.ttf" id="8_msohs"]
+[ext_resource type="Texture2D" uid="uid://bl7uunwgelpje" path="res://ASSET/newbg.png" id="8_tbxec"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m10jx"]
 atlas = ExtResource("2_vql1m")
@@ -59,22 +59,22 @@ size = Vector2(3000, 40)
 
 [sub_resource type="LabelSettings" id="LabelSettings_tbxec"]
 font = ExtResource("8_msohs")
-font_size = 36
-font_color = Color(0.47058824, 0.23921569, 0.16862746, 1)
+font_size = 69
+outline_size = 11
+outline_color = Color(0.47058824, 0.23921569, 0.16862746, 1)
 
 [node name="MAIN" type="Node2D" unique_id=1877317916]
 script = ExtResource("1_we6fm")
-speed = 0.0
 
 [node name="Daven" type="CharacterBody2D" parent="." unique_id=1231262178]
-position = Vector2(153.85107, 478.2837)
+position = Vector2(246, 448)
 script = ExtResource("1_vcodn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Daven" unique_id=304555654]
 position = Vector2(2, -62)
 scale = Vector2(0.172, 0.172)
 sprite_frames = SubResource("SpriteFrames_tbxec")
-animation = &"run"
+animation = &"die"
 autoplay = "run"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Daven" unique_id=1903236314]
@@ -87,7 +87,7 @@ position = Vector2(255, -50)
 texture = ExtResource("2_vql1m")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=672527657]
-position = Vector2(434.85107, 574.2837)
+position = Vector2(435, 592)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=909607206]
 position = Vector2(-27, -59)
@@ -95,18 +95,6 @@ shape = SubResource("RectangleShape2D_x6teq")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=817535610]
 position = Vector2(565.8511, 320.2837)
-
-[node name="Bg1" type="Sprite2D" parent="." unique_id=237775180]
-z_index = -1
-position = Vector2(956.8511, 319.2837)
-scale = Vector2(0.887524, 0.887524)
-texture = ExtResource("4_vql1m")
-
-[node name="Bg2" type="Sprite2D" parent="." unique_id=1349629451]
-z_index = -1
-position = Vector2(-970.1489, 319.2837)
-scale = Vector2(0.887524, 0.887524)
-texture = ExtResource("4_vql1m")
 
 [node name="ObstacleSpawner" type="Node2D" parent="." unique_id=175472147]
 position = Vector2(1185.8511, 473.2837)
@@ -132,5 +120,15 @@ grow_horizontal = 0
 size_flags_horizontal = 0
 text = "0.0 s"
 label_settings = SubResource("LabelSettings_tbxec")
+
+[node name="Newbg" type="Sprite2D" parent="." unique_id=1190808392]
+z_index = -1
+position = Vector2(434, 324)
+texture = ExtResource("8_tbxec")
+
+[node name="Newbg2" type="Sprite2D" parent="." unique_id=2081681033]
+z_index = -1
+position = Vector2(434, 323)
+texture = ExtResource("8_tbxec")
 
 [connection signal="timeout" from="ObstacleSpawner/Timer" to="ObstacleSpawner" method="_on_timer_timeout"]
