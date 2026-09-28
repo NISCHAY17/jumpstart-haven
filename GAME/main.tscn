@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://dkd3qsst48n6h"]
+
+[ext_resource type="Script" uid="uid://c30j43rifioic" path="res://GAME/daven.gd" id="1_vcodn"]
+[ext_resource type="Script" uid="uid://qrg8yci1syky" path="res://GAME/main.gd" id="1_we6fm"]
+[ext_resource type="Texture2D" uid="uid://b4xlnw4gccca0" path="res://ASSET/SPRITE SHEET.png" id="2_vql1m"]
+[ext_resource type="Texture2D" uid="uid://cp0akleaqbfrx" path="res://ASSET/JUMP.png" id="3_we6fm"]
+[ext_resource type="Texture2D" uid="uid://cerwca0nqe7l4" path="res://ASSET/bg 1v.png" id="4_vql1m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m10jx"]
+atlas = ExtResource("2_vql1m")
+region = Rect2(1597, 0, 570, 724)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ihiju"]
+atlas = ExtResource("2_vql1m")
+region = Rect2(0, 0, 552, 724)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_msohs"]
+atlas = ExtResource("2_vql1m")
+region = Rect2(552, 0, 552, 724)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tbxec"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m10jx")
+}],
+"loop": true,
+"name": &"die",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_we6fm")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ihiju")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_msohs")
+}],
+"loop": true,
+"name": &"run",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_go8tf"]
+radius = 42.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x6teq"]
+size = Vector2(3000, 40)
+
+[node name="MAIN" type="Node2D" unique_id=1877317916]
+script = ExtResource("1_we6fm")
+
+[node name="Daven" type="CharacterBody2D" parent="." unique_id=1231262178]
+position = Vector2(-194, 50)
+script = ExtResource("1_vcodn")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Daven" unique_id=304555654]
+position = Vector2(2, -62)
+scale = Vector2(0.172, 0.172)
+sprite_frames = SubResource("SpriteFrames_tbxec")
+animation = &"run"
+autoplay = "run"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Daven" unique_id=1903236314]
+position = Vector2(7, -51)
+shape = SubResource("CircleShape2D_go8tf")
+
+[node name="SpriteSheet" type="Sprite2D" parent="Daven" unique_id=1038840287]
+visible = false
+position = Vector2(255, -50)
+texture = ExtResource("2_vql1m")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=672527657]
+position = Vector2(87, 146)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=909607206]
+position = Vector2(-27, -59)
+shape = SubResource("RectangleShape2D_x6teq")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=817535610]
+position = Vector2(218, -108)
+
+[node name="Bg1" type="Sprite2D" parent="." unique_id=237775180]
+z_index = -1
+position = Vector2(609, -109)
+scale = Vector2(0.887524, 0.887524)
+texture = ExtResource("4_vql1m")
+
+[node name="Bg2" type="Sprite2D" parent="." unique_id=1349629451]
+z_index = -1
+position = Vector2(-1318, -109)
+scale = Vector2(0.887524, 0.887524)
+texture = ExtResource("4_vql1m")
